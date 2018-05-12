@@ -2,6 +2,7 @@
 title:  "Submit and debug Spark jobs programmatically"
 header:
   image: /assets/images/data-engineering.jpg
+  caption: "Picture credit: [**braindomain.org**](https://braindomain.org/launch-of-the-big-data-analytics-journal/)"
   teaser: assets/images/2017-08-06-submit-spark2-jobs-programmatically/spark.png
 excerpt: "Submit Spark apps programmatically and debug remotely!"
 categories:

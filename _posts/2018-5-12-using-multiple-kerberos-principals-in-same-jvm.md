@@ -2,6 +2,7 @@
 title:  "Use multiple Kerberos principals within the same JVM"
 header:
   image: /assets/images/data-engineering.jpg
+  caption: "Picture credit: [**braindomain.org**](https://braindomain.org/launch-of-the-big-data-analytics-journal/)"
   teaser: assets/images/2018-5-12-using-multiple-kerberos-principals-in-same-jvm/kerberos.png
 excerpt: "Use multiple Kerberos principals within the same app!"
 categories:
