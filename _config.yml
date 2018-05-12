@@ -15,7 +15,7 @@ remote_theme             : "mmistakes/minimal-mistakes"
 # theme: minimal-mistakes-jekyll
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 locale                   : "en-US"
-title                    : "opensorceror's blog"
+title                    : "Ruminations of a Data Engineer"
 title_separator          : "-"
 name                     : &name "Harsh Gadgil"
 description              : &description "The personal blog of Harsh Gadgil"
