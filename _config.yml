@@ -10,10 +10,6 @@
 # Review documentation to determine if you should use `theme` or `remote_theme`
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
-theme                  : "minimal-mistakes-jekyll"
-# remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
-
 # Site Settings
 remote_theme             : "mmistakes/minimal-mistakes"
 # theme: minimal-mistakes-jekyll
@@ -106,7 +102,7 @@ analytics:
 author:
   name             : *name
   avatar           : "/assets/images/hg.jpg"
-  bio              : "A passionate data scientist and software developer who enjoys making mistakes."
+  bio              : "A passionate data engineer and software developer who isn't afraid to make mistakes."
   location         : "Toronto, ON"
   email            : "harsh.gadgil@gmail.com"
   uri              : "http://hgadgil.com"
@@ -286,7 +282,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jemoji
-  # - jekyll-remote-theme
+  - jekyll-remote-theme
 
 # mimic GitHub Pages with --safe
 whitelist:
