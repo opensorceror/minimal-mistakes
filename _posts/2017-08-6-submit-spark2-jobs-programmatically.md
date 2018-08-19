@@ -9,7 +9,7 @@ categories:
   - data-engineering
 ---
 
-{% include toc title="Navigation" icon="file-text" %}
+{% include toc title="Navigation" %}
 
 This is my first post in the [Data Engineering][data-engineering-category] category. In this post, I discuss how to submit Spark 2 apps programmatically in `yarn-cluster` mode, and debug them remotely (e.g., from your favorite developer laptop using your favorite IDE :)).
 
