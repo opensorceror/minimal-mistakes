@@ -9,7 +9,7 @@ categories:
   - data-engineering
 ---
 
-{% include toc title="Navigation" icon="file-text" %}
+{% include toc title="Navigation" %}
 
 This is my second post in the [Data Engineering][data-engineering-category] category. In this post, I discuss how to authenticate and use multiple Kerberos principals within the same JVM. Note that the examples in this post use the Hadoop [`UserGroupInformation`](http://hadoop.apache.org/docs/r2.8.3/api/org/apache/hadoop/security/UserGroupInformation.html) API.
 
@@ -29,7 +29,6 @@ The vast majority of applications built for Hadoop use a single Kerberos princip
 import org.apache.hadoop.security.UserGroupInformation
 import org.apache.hadoop.conf.Configuration
 
-@throws(classOf[Exception])
 def authenticate(principal: String, keyTabPath: String): UserGroupInformation = {
 
   // Set UserGroupInformation for Hadoop components that do use it (e.g., HDFS)
@@ -59,7 +58,6 @@ import org.apache.hadoop.security.UserGroupInformation
 import org.apache.hadoop.conf.Configuration
 import java.security.PrivilegedExceptionAction
 
-@throws(classOf[Exception])
 def authenticateAndGetUGI(principal: String, keyTabPath: String): UserGroupInformation = {
 
   // Set UserGroupInformation for Hadoop components that do use it (e.g., HDFS)

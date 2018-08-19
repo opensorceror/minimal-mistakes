@@ -4,7 +4,7 @@ title: "Privacy Policy"
 modified: 2016-11-27T11:57:46-04:00
 ---
 
-{% include toc %}
+{% include toc title="Navigation" %}
 
 The privacy of my visitors is extremely important. This Privacy Policy outlines the types of personal information that is received and collected and how it is used.
 
