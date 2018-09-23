@@ -80,17 +80,17 @@ val sorted: Future[SortedSequence] = {
 }
 
 sorted onComplete {
-  case Success(value) => println(s"Sorted list: $value")
-  case Failure(e) => println("An abominable error has occured: ${e.getMessage}")
+  case Success(value) => println(s"Sorted sequence: $value")
+  case Failure(e) => println(s"An abominable error has occured: ${e.getMessage}")
 }
 
 {% endhighlight %}
 
-If the `Future` is successful, the sorted list will be printed. If, for any reason the `Future` fails, the exception message will be printed. 
+If the `Future` is successful, the sorted sequence will be printed. If, for any reason the `Future` fails, the exception message will be printed. 
 
 ### Scaling Futures
 
-Suppose we need to launch 100 tasks in parallel, and then do something with the results of the 100 tasks. Creating one future per task and registering a callback for each would be extremely tedious, not to mention unscalable. One solution is to create a sequence of `Future[T]` objects and convert this `Seq[Future[T]]` object into a single `Future[List[T]]` object, so we can do something with the results collected from all futures.
+Suppose we need to launch 100 tasks in parallel, and then do something with the results of the 100 tasks. Creating one future per task and registering a callback for each would be extremely tedious, not to mention unscalable. One solution is to create a sequence of `Future[T]` objects and convert this `Seq[Future[T]]` object into a single `Future[Seq[T]]` object, so we can do something with the results collected from all futures.
 
 An example will help illustrate the idea:
 
@@ -193,7 +193,7 @@ Task 2 running...
 Task 3 running...
 Task 3 done!
 Task 1 done!
-List(result from task 1, Task 2 fails, result from task 3)
+**Drumroll** And the results are...: List(result from task 1, Task 2 fails, result from task 3)
 ```
 
 That works as expected! Now you know about asynchronous programming in Scala! I'd love to hear your thoughts about this post, please leave a comment below!
