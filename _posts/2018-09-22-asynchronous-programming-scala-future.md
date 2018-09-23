@@ -42,7 +42,7 @@ For an interesting detailed discussion, refer to [Jenkov's excellent blog post][
 
 So where does *asynchronous programming* fit in then? Well, it may imply either concurrency or parallelism. If the processor supports running tasks in parallel, asynchronously launched tasks will run in parallel. If the processor can only run one task at a time, asynchronously launched tasks will run concurrently. 
 
-## Asynchonous programming in Scala
+## Asynchronous programming in Scala
 Scala provides simple, elegant high level APIs to execute code asynchronously. This section briefly discusses *Futures* and related concepts.
 
 ### Using Futures
