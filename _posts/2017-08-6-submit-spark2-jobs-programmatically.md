@@ -20,6 +20,7 @@ This is my first post in the [Data Engineering][data-engineering-category] categ
 Spark applications are usually submitted to YARN using a `spark-submit` command. In cases where this capability is needed programmatically, Spark provides the  [`SparkLauncher`](http://spark.apache.org/docs/latest/api/java/index.html?org/apache/spark/launcher/package-summary.html) class which allows the submission of Spark apps as a child process, that can then be monitored using an elegant [Monitoring](https://spark.apache.org/docs/latest/monitoring.html) API.
 
 Submitting jobs programmatically is often useful in cases where jobs need to be created on-the-fly. `SparkLauncher` makes this easy:
+
 {% highlight scala linenos %}
 
 import org.apache.spark.launcher.SparkLauncher
