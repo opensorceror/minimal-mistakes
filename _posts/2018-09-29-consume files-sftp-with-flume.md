@@ -11,7 +11,7 @@ categories:
 
 {% include toc title="Navigation" %}
 
-When many data scientists join the industry right after graduation, they're often disillusioned because the nature of their new work doesn't live upto their expectations. They quickly realize that data in the real world may be dirty, unreliable and may require an inordinate amount of engineering effort to ingest, clean, transform, store and maintain. This may be in stark contrast to the relatively pristine csv files that they may have taken for granted during their academic utpoia; data that let them focus on algorithms and models instead of housekeeping.
+When many data scientists join the industry right after graduation, they're often disillusioned because the nature of their new work doesn't live upto their expectations. They quickly realize that data in the real world may be dirty, unreliable and may require an inordinate amount of engineering effort to ingest, clean, transform, store and maintain. This may be in stark contrast to the relatively pristine csv files that they may have taken for granted during their academic utopia; data that let them focus on algorithms and models instead of housekeeping.
 
 Lisha Li illustrates this nicely:
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">.<a href="https://twitter.com/karpathy?ref_src=twsrc%5Etfw">@karpathy</a> : sleep-lost pie chart transition from academia to industry. Time spent worry about dataset &gt;&gt; time spent on model optimization <a href="https://t.co/nDmxo4VAC6">pic.twitter.com/nDmxo4VAC6</a></p>&mdash; lisha li (@lishali88) <a href="https://twitter.com/lishali88/status/994723759981453312?ref_src=twsrc%5Etfw">May 10, 2018</a></blockquote>
@@ -85,7 +85,7 @@ agent.sources.sftp1.type = org.keedio.flume.source.ftp.source.Source
 agent.sources.sftp.client.source = sftp
 
 # Source connection properties
-agent.sources.sftp1.name.server = 142.95.254.34
+agent.sources.sftp1.name.server = <server_ip>
 agent.sources.sftp1.port = 22
 agent.sources.sftp1.user = <username>
 agent.sources.sftp1.password = <password>
@@ -133,7 +133,7 @@ agent.sources.sftp1.type = org.keedio.flume.source.ftp.source.Source
 agent.sources.sftp.client.source = sftp
 
 # Source connection properties
-agent.sources.sftp1.name.server = 142.95.254.34
+agent.sources.sftp1.name.server = <server_ip>
 agent.sources.sftp1.port = 22
 agent.sources.sftp1.user = <username>
 agent.sources.sftp1.password = <password>
@@ -165,7 +165,7 @@ agent.sinks.logger1.channel = mem1
 
 On line 23, we're now specifying that our source files are GZIP compressed. This will cause the agent to decompress the files *on-the-fly*. Additionally, on line 24, we're specifying that we want to read the decompressed data line-by-line, so that each event in the channel will be one individual record in the `.csv` files within the `.gz` files. Finally, on line 25, we're requesting that the agent delete the files once they're fully consumed by setting the `<agent_name>.sources.sftp1.deleteOnCompletion` property to `true`.
 
-Setting up your ingestion process over SFTP using Flume is that simple! Contributions to the `flume-ftp-source` plugin, or my fork of it, are welcomed! :relaxed:
+Setting up your ingestion process over SFTP using Flume is that simple! Contributions to the `flume-ftp-source` plugin, or my fork of it, are welcome! :relaxed:
 
 [Get SFTP source plugin on GitHub][hgadgil-flume-ftp-source]{: .btn .btn--success .btn--large}
 
