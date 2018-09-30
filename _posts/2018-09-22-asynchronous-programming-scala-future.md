@@ -3,7 +3,7 @@ title:  "Asynchronous programming with Scala Futures"
 header:
   caption: "Photo credit: [**Official Scala logo**](https://www.scala-lang.org/)"
   teaser: assets/images/scala-spiral.png
-excerpt: "Demystifying asynchronous programming with Scala"
+excerpt: "Demystifying asynchronous programming with Scala."
 categories:
   - general-programming
 

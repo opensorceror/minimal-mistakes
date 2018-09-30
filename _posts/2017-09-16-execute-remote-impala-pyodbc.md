@@ -4,7 +4,7 @@ header:
   image: /assets/images/data-engineering.jpg
   caption: "Picture credit: [**braindomain.org**](https://braindomain.org/launch-of-the-big-data-analytics-journal/)"
   teaser: assets/images/2017-09-16-execute-remote-impala-pyodbc/impala-logo.png
-excerpt: "Execute Impala queries remotely in Python and get result set into a pandas `DataFrame`"
+excerpt: "Execute Impala queries remotely in Python and get result set into a pandas `DataFrame`."
 categories:
   - data-science
 ---
