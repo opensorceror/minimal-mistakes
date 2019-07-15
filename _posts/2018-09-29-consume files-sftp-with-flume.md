@@ -17,12 +17,12 @@ Lisha Li illustrates this nicely:
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">.<a href="https://twitter.com/karpathy?ref_src=twsrc%5Etfw">@karpathy</a> : sleep-lost pie chart transition from academia to industry. Time spent worry about dataset &gt;&gt; time spent on model optimization <a href="https://t.co/nDmxo4VAC6">pic.twitter.com/nDmxo4VAC6</a></p>&mdash; lisha li (@lishali88) <a href="https://twitter.com/lishali88/status/994723759981453312?ref_src=twsrc%5Etfw">May 10, 2018</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-
-Robert Chang describes his own similar experience in his excellent post series - [A Beginner's Guide to Data Engineering](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7). 
+Robert Chang describes his own similar experience in his excellent post series - [A Beginner's Guide to Data Engineering](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7).
 
 So, what does this have to do with Flume? As a data scientist in a startup or otherwise small team, you may, from time to time, need to do data engineering on your own to obtain data for your analyses. Flume often makes this process less painful, quicker, and even fun:bangbang:
 
 ## Why Flume
+
 [Apache Flume][apache-flume] was originally built for collecting and moving large amounts of log data. However, its plugin-based architecture quickly sparked a flurry of plugins that let you ingest data from a variety of sources, including Kafka, JMS, NetCat, HTTP and many others, and load this data into a variety of destinations, including HDFS, HTTP, Solr, local files, etc. 
 
 Flume is one of my favorite tools to ingest data with, because it lets you create simple *configuration-based* ingestion processes, called *agents* in Flume terminology. A simple configuration file may look like the following[^flume_example]:
@@ -107,7 +107,6 @@ agent.channels.mem1.transactionCapacity = 100
 # Bind source and sink to channel
 agent.sources.sftp1.channels = mem1
 agent.sinks.logger1.channel = mem1
-
 {% endhighlight %}
 
 For brevity, this example does not show all configuration properties supported by the `ftp-source-plugin`. For a comprehensive example configuration, see [here][sftp-example].
@@ -118,7 +117,7 @@ In the above example, most properties are self-explanatory, but I'd like to draw
 How does the agent know which files have already been read, so that it doesn't read them again? The agent keeps tracks of the files it has read in a special file, which can be specified by the property `<agent_name>.sources.sftp1.file.name` (line 20). 
 
 ### Decompressing files on-the-fly
-In practice, I've often come across source files that are compressed using the GZIP compression codec. Inside these GZIP files are often `.csv` files. To address this especially interesting case, I've contributed a feature to the source repo that enables the Flume agent to decompress these GZIP files on-the-fly, and make the individual records inside the contained `.csv` files available as individual events in the channel. [My fork][hgadgil-flume-ftp-source] has some additional features that haven't yet been merged into the source repo, including automatically deleting source files once fully consumed. 
+In practice, I've often come across source files that are compressed using the GZIP compression codec. Inside these GZIP files are often `.csv` files. To address this especially interesting case, I've contributed a feature to the source repo that enables the Flume agent to decompress these GZIP files on-the-fly, and make the individual records inside the contained `.csv` files available as individual events in the channel. [My fork][hgadgil-flume-ftp-source] has some additional features that haven't yet been merged into the source repo, including automatically deleting source files once fully consumed.
 
 With this special case, our example agent may now look like this:
 
@@ -160,7 +159,6 @@ agent.channels.mem1.transactionCapacity = 100
 # Bind source and sink to channel
 agent.sources.sftp1.channels = mem1
 agent.sinks.logger1.channel = mem1
-
 {% endhighlight %}
 
 On line 23, we're now specifying that our source files are GZIP compressed. This will cause the agent to decompress the files *on-the-fly*. Additionally, on line 24, we're specifying that we want to read the decompressed data line-by-line, so that each event in the channel will be one individual record in the `.csv` files within the `.gz` files. Finally, on line 25, we're requesting that the agent delete the files once they're fully consumed by setting the `<agent_name>.sources.sftp1.deleteOnCompletion` property to `true`.
