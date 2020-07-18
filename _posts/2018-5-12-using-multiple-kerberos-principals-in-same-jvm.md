@@ -30,18 +30,12 @@ import org.apache.hadoop.security.UserGroupInformation
 import org.apache.hadoop.conf.Configuration
 
 def authenticate(principal: String, keyTabPath: String): UserGroupInformation = {
-
-  // Set UserGroupInformation for Hadoop components that do use it (e.g., HDFS)
-  logger.info("Attempting to authenticate to KDC for principal " +
-    principal + " using keytab " + keyTabPath)
-
   val conf = new Configuration
   conf.set("hadoop.security.authentication", "kerberos")
   UserGroupInformation.setConfiguration(conf)
   UserGroupInformation.loginUserFromKeytab(principal, keyTabPath)
 
-  logger.info("Currently logged in user: " +
-    UserGroupInformation.getCurrentUser.getShortUserName)
+  logger.info(s"Currently logged in user: ${UserGroupInformation.getCurrentUser.getShortUserName}")
 
   UserGroupInformation.getCurrentUser
 }
@@ -59,17 +53,12 @@ import org.apache.hadoop.conf.Configuration
 import java.security.PrivilegedExceptionAction
 
 def authenticateAndGetUGI(principal: String, keyTabPath: String): UserGroupInformation = {
-
-  // Set UserGroupInformation for Hadoop components that do use it (e.g., HDFS)
-  logger.info("Attempting to authenticate to KDC for principal " +
-    principal + " using keytab " + keyTabPath)
-
   val conf = new Configuration
   conf.set("hadoop.security.authentication", "kerberos")
   UserGroupInformation.setConfiguration(conf)
   val ugi = UserGroupInformation.loginUserFromKeytabAndReturnUGI(principal, keyTabPath)
 
-  logger.info("Successfully authenticated user: " + ugi.getUserName)
+  logger.info(s"Successfully authenticated user: ${ugi.getUserName}")
 
   ugi
 }

@@ -16,7 +16,7 @@ Asynchronous programming can be a daunting subject when first encountered by pro
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">A programmer had a problem. He thought to himself, &quot;I know, I&#39;ll solve it with threads!&quot;. has Now problems. two he</p>&mdash; Davidlohr Bueso (@davidlohr) <a href="https://twitter.com/davidlohr/status/288786300067270656?ref_src=twsrc%5Etfw">January 8, 2013</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-For a more in-depth look at asynchronous programming with Scala, check out the [official docs][scala-futures-docs]. 
+For a more in-depth look at asynchronous programming with Scala, check out the [official docs][scala-futures-docs].
 {: .notice--info}
 
 ## Why asynchronous?
@@ -36,38 +36,41 @@ A more efficient approach may be to launch all $$N$$ tasks in parallel (Fig. 2).
 Another approach is to only launch certain tasks asynchronously, such as those that run much longer than others (Fig. 3). Coming back to our example where $$T_2$$ runs much longer than other tasks, we can launch $$T_2$$ asynchronously after $$T_1$$. By doing this, the execution will immediately move on to $$T_3$$ without waiting for $$T_2$$ to complete, while $$T_2$$ will continue to run on a separate *thread*. When $$T_2$$ completes, its result can be obtained using a *callback* (discussed shortly).
 
 ## Parallelism vs concurrency
-Before proceeding, it is important to distinguish between *parallelism* and *concurrency*. Although they may look like synonyms in everyday usage, these terms are defined differently in computer science. 
+
+Before proceeding, it is important to distinguish between *parallelism* and *concurrency*. Although they may look like synonyms in everyday usage, these terms are defined differently in computer science.
 
 For an interesting detailed discussion, refer to [Jenkov's excellent blog post][jenkov-concurrency-vs-parallelism]. Briefly, concurrency represents tasks that *seemingly* run in parallel, while parallelism represents tasks that actually run in parallel. When a processor runs tasks concurrently, they may all be making progress, but the processor is actually only running one or a subset of them at any instant in time. This is usually achieved by rapidly switching context from one task to another. On the other hand, when a processor is running tasks in parallel, it is actually running all of them simultaneously.
 
-So where does *asynchronous programming* fit in then? Well, it may imply either concurrency or parallelism. If the processor supports running tasks in parallel, asynchronously launched tasks will run in parallel. If the processor can only run one task at a time, asynchronously launched tasks will run concurrently. 
+So where does *asynchronous programming* fit in then? Well, it may imply either concurrency or parallelism. If the processor supports running tasks in parallel, asynchronously launched tasks will run in parallel. If the processor can only run one task at a time, asynchronously launched tasks will run concurrently.
 
 ## Asynchronous programming in Scala
+
 Scala provides simple, elegant high level APIs to execute code asynchronously. This section briefly discusses *Futures* and related concepts.
 
 ### Using Futures
+
 Simply put, the aptly named `Future` object represents any code that may run asynchronously and produce a result in the future.
 
 Here's an example of a `Future`:
 
 {% highlight scala %}
-
 import scala.concurrent.ExecutionContext.Implicits.global
 
-val sorted: Future[SortedSequence] = {
-  abominablySlowSortingAlgorithm(abominablyLargeSequence) // abominably long lasting computation
+val sorted: Future[SortedSequence] = Future {
+  // abominably long lasting computation
+  abominablySlowSortingAlgorithm(abominablyLargeSequence)
 }
-
 {% endhighlight %}
 
 Note the import. This is an *implicit* global static thread pool that is used to execute the `Future`. It is also possible to explicitly specify an *`ExecutionContext`* with a user-defined thread pool; for a detailed discussion please refer to the [official docs][scala-futures-docs]. 
 
-The `sorted` value here is a `Future` that embodies the result of the long lasting sort operation. 
+The `sorted` value here is a `Future` that embodies the result of the long lasting sort operation.
 
 ### Callbacks
-Usually, we are interested in obtaining the results from an asynchronous computation. This can be achieved by using a *callback*. A callback is simply a function that is called when a `Future` is completed. Since higher-order functions are first class citizens in Scala, the definition of callbacks is easily achieved. 
 
-For a `Future`, a callback is typically registered by supplying a function of type `Try[T] => U` to the `onComplete` method. If the `Future` is successful, the supplied callback is applied to the value of type `Success[T]`, or to a value of type `Failure[T]` otherwise. 
+Usually, we are interested in obtaining the results from an asynchronous computation. This can be achieved by using a *callback*. A callback is simply a function that is called when a `Future` is completed. Since higher-order functions are first class citizens in Scala, the definition of callbacks is easily achieved.
+
+For a `Future`, a callback is typically registered by supplying a function of type `Try[T] => U` to the `onComplete` method. If the `Future` is successful, the supplied callback is applied to the value of type `Success[T]`, or to a value of type `Failure[T]` otherwise.
 
 Coming back to our sorting example, we can now register the callback as follows:
 
@@ -75,18 +78,18 @@ Coming back to our sorting example, we can now register the callback as follows:
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-val sorted: Future[SortedSequence] = {
-  abominablySlowSortingAlgorithm(abominablyLargeSequence) // abominably long lasting computation
+val sorted: Future[SortedSequence] = Future {
+  // abominably long lasting computation
+  abominablySlowSortingAlgorithm(abominablyLargeSequence)
 }
 
 sorted onComplete {
   case Success(value) => println(s"Sorted sequence: $value")
   case Failure(e) => println(s"An abominable error has occured: ${e.getMessage}")
 }
-
 {% endhighlight %}
 
-If the `Future` is successful, the sorted sequence will be printed. If, for any reason the `Future` fails, the exception message will be printed. 
+If the `Future` is successful, the sorted sequence will be printed. If, for any reason the `Future` fails, the exception message will be printed.
 
 ### Scaling Futures
 
@@ -129,11 +132,12 @@ Await.ready(futures, 20 seconds)
 
 {% endhighlight %}
 
-On line 24, we converting a `Seq[Future[String]]` object into a `Future[Seq[String]]` object. Note that internally, what this actually does is: 
+On line 24, we're converting a `Seq[Future[String]]` object into a `Future[Seq[String]]` object. Note that internally, what this actually does is:
+
 1. Executes the Futures in the sequence asynchronously
 2. Once all Futures are complete (whether successfully or otherwise), combines the result of all Futures into a `Future[Seq[String]]` object.
 
-However, there is a problem with this code. We're defining three Futures, and one of them throws a `RuntimeException`. Can you guess what will happen here? 
+However, there is a problem with this code. We're defining three Futures, and one of them throws a `RuntimeException`. Can you guess what will happen here?
 
 Here's the output:
 
@@ -145,9 +149,10 @@ Task 3 done!
 Task 1 done!
 ```
 
-Oh wait, where are the results of the tasks that we're printing on line 27? 
+Oh wait, where are the results of the tasks that we're printing on line 27?
 
 ### Composing Futures
+
 The reason the results of the tasks were not printed to the console is as follows: If any of the Futures in a sequence of Futures fails, the `onSuccess` function does not get executed. And since we did not define an `onFailure` function, the exception was ignored! What now?
 
 Scala's powerful functional personality comes to the rescue again! Scala allows composing Futures using *combinators*. Briefly, combinators are functions that operate on Futures and return new `Future` objects. Scala providers several types of combinators, including `flatMap`, `filter`, `foreach`, etc.
@@ -168,7 +173,7 @@ lazy val t2 = Future[String] {
   println("Task 2 running...")
   throw new RuntimeException("Task 2 fails")
 } recover {
-    case e: Exception => e.getMessage
+  case e: Exception => e.getMessage
 }
 
 lazy val t3 = Future[String] {

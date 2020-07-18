@@ -18,6 +18,6 @@ Embarrassingly, one of the main reasons for my marathon procrastination was beca
 - Using a blogging system such as [WordPress](https://wordpress.com/) or branded.me
 - Building a blogging website using vanilla HTML and CSS
 
-Using WordPress was too limiting for a programmer, and writing every blog post in vanilla HTML felt like needless effort. 
+Using WordPress was too limiting for a programmer, and writing every blog post in vanilla HTML felt like needless effort.
 
 That was until I stumbled upon Jekyll. I'm very impressed, and I'm usually not so easily impressed. Setting up this blog has *not* been easy, but it has been fun! Jekyll is incredibly powerful, and I'm going to enjoy blogging using Markdown!

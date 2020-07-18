@@ -53,7 +53,7 @@ a1.sources.r1.channels = c1
 a1.sinks.k1.channel = c1
 ```
 
-This simple agent has one *source*, one *channel* and one *sink*, which are essentially plugins that let you read, buffer and store data. The agent loads data from the specified source (`netcat`), buffers the data into the specified channel (`memory`) and then loads it into the specified sink (`file_roll`). That's it! Once the agent is started, it ingests data continuously. 
+This simple agent has one *source*, one *channel* and one *sink*, which are essentially plugins that let you read, buffer and store data. The agent loads data from the specified source (`netcat`), buffers the data into the specified channel (`memory`) and then loads it into the specified sink (`file_roll`). That's it! Once the agent is started, it ingests data continuously.
 
 If a little more flexibility is required in terms of the transformations to be done on the source data before being loaded into the sink, Flume provides the concept of *interceptors*. An interceptor is  pluggable custom code[^interceptor-language] that modifies input data[^flume-events] in-flight. Interceptors are a very interesting topic, one that I would love to discuss in detail in a future post.
 
@@ -65,13 +65,15 @@ Flume also makes it easy to create your own source/sink/channel plugins! We shal
 ## Consuming data over SFTP
 
 ### Motivation
-Although, for many applications, getting data as realtime as possible (e.g., using Kafka) is essential, (S)FTP data pipelines are all too common[^ftp-realtime]. FTP servers/accounts are easy to set up, maintain and system administrators everywhere are likely familiar with them. 
 
-As a data engineer, wouldn't it be awesome if you could quickly set up a Flume agent to read data over (S)FTP from the specified server using the specified credentials, and quickly load it into your Hadoop cluster, all using a single configuration file? 
+Although, for many applications, getting data as realtime as possible (e.g., using Kafka) is essential, (S)FTP data pipelines are all too common[^ftp-realtime]. FTP servers/accounts are easy to set up, maintain and system administrators everywhere are likely familiar with them.
 
-The folks over at Keedio sure agree. They've developed a nifty [FTP source plugin][keedio-flume-ftp-source] that lets you ingest data over FTP, SFTP and FTPS. 
+As a data engineer, wouldn't it be awesome if you could quickly set up a Flume agent to read data over (S)FTP from the specified server using the specified credentials, and quickly load it into your Hadoop cluster, all using a single configuration file?
+
+The folks over at Keedio sure agree. They've developed a nifty [FTP source plugin][keedio-flume-ftp-source] that lets you ingest data over FTP, SFTP and FTPS.
 
 ### A simple example
+
 Here's an example agent that transfers data over SFTP:
 
 {% highlight properties linenos %}
@@ -112,11 +114,12 @@ agent.sinks.logger1.channel = mem1
 For brevity, this example does not show all configuration properties supported by the `ftp-source-plugin`. For a comprehensive example configuration, see [here][sftp-example].
 {: .notice--info}
 
-In the above example, most properties are self-explanatory, but I'd like to draw your attention to lines 18 and 19. On line 18, the `<agent_name>.sources.sftp1.filter.pattern` property lets us specify a regular expression to filter the files discovered by the agent; only files whose names match the expression will be read. On line 19, the `<agent_name>.sources.sftp1.run.discover.delay` property specifies the time interval used by the agent to poll the server. A value of 5000 indicates that the agent will search the server for new files every 5 seconds. 
+In the above example, most properties are self-explanatory, but I'd like to draw your attention to lines 18 and 19. On line 18, the `<agent_name>.sources.sftp1.filter.pattern` property lets us specify a regular expression to filter the files discovered by the agent; only files whose names match the expression will be read. On line 19, the `<agent_name>.sources.sftp1.run.discover.delay` property specifies the time interval used by the agent to poll the server. A value of 5000 indicates that the agent will search the server for new files every 5 seconds.
 
-How does the agent know which files have already been read, so that it doesn't read them again? The agent keeps tracks of the files it has read in a special file, which can be specified by the property `<agent_name>.sources.sftp1.file.name` (line 20). 
+How does the agent know which files have already been read, so that it doesn't read them again? The agent keeps tracks of the files it has read in a special file, which can be specified by the property `<agent_name>.sources.sftp1.file.name` (line 20).
 
 ### Decompressing files on-the-fly
+
 In practice, I've often come across source files that are compressed using the GZIP compression codec. Inside these GZIP files are often `.csv` files. To address this especially interesting case, I've contributed a feature to the source repo that enables the Flume agent to decompress these GZIP files on-the-fly, and make the individual records inside the contained `.csv` files available as individual events in the channel. [My fork][hgadgil-flume-ftp-source] has some additional features that haven't yet been merged into the source repo, including automatically deleting source files once fully consumed.
 
 With this special case, our example agent may now look like this:

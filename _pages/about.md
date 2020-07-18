@@ -27,15 +27,16 @@ I currently work as a machine learning engineer at Bell Canada. I graduated with
 
 ## What I Do
 
-I spend most of my time digging through data to find something that enables better decision making. I also frequently write code in Python, Scala and JavaScript, three of my favorite programming languages. However, I *try* to be technology agnostic - to use the best tool for the job without playing favorites.
+I spend most of my time digging through data to find something that enables better decision making. I also frequently write code in Scala and Python, two of my favorite programming languages. However, I *try* to be technology agnostic - to use the best tool for the job without playing favorites.
 
 ## Interests
 
 - *Reading*: Due to my Masters studies, I had lost touch with books for a while. A recent Kindle purchase sparked the dormant love of reading and now I'm hooked. I mostly read mystery/thriller novels. A great recent read was [A Girl on the Train](https://www.goodreads.com/choiceawards/best-mystery-thriller-books-2015) by Paula Hawkins. Due to my recent interest in creating this blog, I'm currently struggling to find time to read [The Heist](https://www.goodreads.com/book/show/18730158-the-heist?from_search=true) by Daniel Silva. I also enjoy reading about technology and politics. Yes, I agree, [Wired](https://www.wired.com/) should stick to technology articles only.
 - *Watching*: I enjoy both real science and fictional science...anything with science really. I'm an avid viewer of [PBS Spacetime](https://www.youtube.com/channel/UC7_gcs09iThXybpVgjHZ_7g). Matt O'Dowd explains mind-boggling physics concepts about the nature of reality in relatively easier to understand ways. One of my all time favorite space documentaries is [Cosmos - A Spacetime Odyssey](http://www.imdb.com/title/tt2395695/) hosted by the legendary Neil deGrasse Tyson. A new favorite is [Planet Earth II](http://www.imdb.com/title/tt5491994/), which displays breathtaking UHD footage of wildlife on our wonderful, fragile planet.
-- *Learning*: In my spare time, you can often find me cooking, traveling or watching videos on [Khan Academy](https://www.khanacademy.org/) and taking (or rather, trying to find time to take) courses on [Coursera](https://www.coursera.org/).     
+- *Learning*: In my spare time, you can often find me cooking, traveling or watching videos on [Khan Academy](https://www.khanacademy.org/) and taking (or rather, trying to find time to take) courses on [Coursera](https://www.coursera.org/).
 
 ---
 
 ## This Template
+
 This template - Minimal Mistakes - is designed, developed, and maintained by the incredibly creative [Michael Rose](https://mademistakes.com/).

@@ -11,11 +11,11 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 # Site Settings
-remote_theme             : "mmistakes/minimal-mistakes@4.16.4"
+remote_theme             : "mmistakes/minimal-mistakes@4.19.3"
 # theme: minimal-mistakes-jekyll
 minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 locale                   : "en-US"
-title                    : "Ruminations of a Data Engineer"
+title                    : "Ruminations of a Machine Learner"
 title_separator          : "-"
 name                     : &name "Harsh Gadgil"
 description              : &description "The personal blog of Harsh Gadgil"
@@ -101,7 +101,7 @@ analytics:
 author:
   name             : *name
   avatar           : "/assets/images/hg.jpg"
-  bio              : "A passionate data engineer and software developer who isn't afraid to make mistakes."
+  bio              : "A passionate machine learning engineer who isn't afraid to make mistakes."
   location         : "Toronto, ON"
   email            : "harsh.gadgil@gmail.com"
   uri              : "http://hgadgil.com"

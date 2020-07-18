@@ -24,16 +24,11 @@ To judge the extent of your memory loss and normalcy of cognitive functions, the
 Consider three scenarios:
 
 1. The nurse shows you example pictures of cats and dogs and identifies them for you. You notice some cats that fairly resemble dogs, and dogs that fairly resemble cats. Then, she shows you a much larger sample of pictures in random order and asks you to identify them. Since you've already been "trained" on what cats and dogs look like, you're able to identify them with ease. This is an example of *Supervised Machine Learning*.
-
 2. The nurse tells you nothing about what cats and dogs look like, but asks you to group the animals into two groups based on similarities in their appearance. You notice that cats are generally smaller, have whiskers and are cuter. You classify the animals into a pile of cats, and another pile of dogs. Proud of yourself, you turn to the nurse. She doesn't look too happy, however. She says that you incorrectly classified some dogs as cats and some cats and dogs, because they were extremely similar! This is an example of *Unsupervised Machine Learning*.
-
 3. The nurse shows you a small number of pictures of cats and dogs and a much larger number of unlabeled pictures. You are then allowed to show the nurse a *maximum* of three unlabeled pictures, and request her to identify them. Once done, she asks you to use both your intuition and your observations from the labeled pictures to identify the rest. When presented with the remaining pictures of cats and dogs, you classify them better than when you knew nothing about them, but not as accurately as you did when you were shown a *lot* of pictures of them. This is an example of *Semi-Supervised Machine Learning*.
-
 
 Great. Now you know again what cats and dogs look like, and now you can get back to googling and ogling them (for some reason, facebooking and ogling just didn't sound right).
 
-
 Now imagine that the nurse is you, and "you" is the computer. And the computer can identify a lot more than cats and dogs with extremely high precision, but you must first teach it how to.
-
 
 Welcome, fellow apprentice, to the world of Machine Learning.
